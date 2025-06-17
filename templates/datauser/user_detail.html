@@ -1,0 +1,31 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/user_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container user-detail-container">
+    <h1 class="page-title">Detail Pengguna</h1>
+    <div class="user-info">
+      <div class="user-avatar">
+        {% if user.foto %}
+          <img src="{{ url_for('static', filename='uploads/' + user.foto) }}" alt="Foto Profil" class="avatar">
+        {% else %}
+          <div class="avatar-placeholder">No Photo</div>
+        {% endif %}
+      </div>
+
+      <div class="user-details">
+        <p><strong>Nama:</strong> {{ user.nama }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Password:</strong> {{ user.password }}</p>
+        <p><strong>Dibuat pada:</strong> {{ user.created_at }}</p>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <a href="{{ url_for('datauser.user_index') }}" class="btn btn-back">← Kembali ke Daftar Pengguna</a>
+    </div>
+  </div>
+{% endblock %}

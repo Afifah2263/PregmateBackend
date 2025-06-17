@@ -1,0 +1,48 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/terapi.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="page-title">Daftar Terapi</h1>
+
+    <div class="action-container">
+      <a class="btn-add" href="{{ url_for('terapi.create_terapi') }}">
+        <i class="fa fa-plus"></i> Tambah Terapi
+      </a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="terapi-table">
+        <thead>
+          <tr>
+            <th>Nama Terapi</th>
+            <th>Deskripsi</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for terapi in terapi_list %}
+          <tr>
+            <td>{{ terapi.nama }}</td>
+            <td>{{ terapi.deskripsi }}</td>
+            <td>
+              <a class="btn btn-detail" href="{{ url_for('terapi.detail_terapi', id=terapi._id) }}">
+                <i class="fa fa-info-circle"></i> Detail
+              </a>
+              <a class="btn btn-edit" href="{{ url_for('terapi.edit_terapi', id=terapi._id) }}">
+                <i class="fa fa-pencil"></i> Edit
+              </a>
+              <a class="btn btn-delete" href="{{ url_for('terapi.hapus_terapi', id=terapi._id) }}">
+                <i class="fa fa-trash"></i> Hapus
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artikel.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Daftar Artikel</h1>
+
+  <form method="get" action="{{ url_for('artikel_bp.index') }}">
+    <input type="text" name="search" placeholder="Cari judul atau konten..." value="{{ search_query or '' }}">
+    <button type="submit">Cari</button>
+  </form>
+
+  <a class="tambah-link" href="{{ url_for('artikel_bp.create') }}">+ Tambah Artikel</a>
+
+  <table class="artikel-table">
+    <thead>
+      <tr>
+        <th>Gambar</th>
+        <th>Judul</th>
+        <th>Konten</th>
+        <th style="text-align: center;">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if articles %}
+        {% for artikel in articles %}
+          <tr>
+            <td><img src="{{ artikel.imageUrl }}" width="100"></td>
+            <td>{{ artikel.title }}</td>
+            <td>{{ artikel.content[:100] }}...</td>
+            <td style="text-align: center;">
+              <a href="{{ url_for('artikel_bp.edit', id=artikel._id) }}" class="btn btn-warning">Edit</a>
+              <a href="{{ url_for('artikel_bp.delete', id=artikel._id) }}" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">Hapus</a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4" style="text-align:center;">Data tidak ditemukan</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('artikel_bp.index', page=page-1, search=search_query) }}">&laquo; Prev</a>
+    {% endif %}
+    <span>Page {{ page }}</span>
+    {% if has_next %}
+      <a href="{{ url_for('artikel_bp.index', page=page+1, search=search_query) }}">Next &raquo;</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

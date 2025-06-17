@@ -1,0 +1,106 @@
+from flask import request, jsonify
+from bson.objectid import ObjectId
+from datetime import datetime, timedelta
+import random
+import smtplib
+from email.mime.text import MIMEText
+from werkzeug.security import generate_password_hash
+from models.datauser_model import User
+from models.userlog_model import UserLog
+OTP_EXPIRE_MINUTES = 10
+
+def send_email(to_email, subject, message):
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+    smtp_user = "rizkiekamulyani123@gmail.com"        # Ganti sesuai email kamu
+    smtp_password = "ykfa bxvy ihly thqm"     # Ganti sesuai password/app password
+
+    msg = MIMEText(message)
+    msg['Reply-To'] = smtp_user
+    msg['Subject'] = subject
+    msg['From'] = smtp_user
+    msg['To'] = to_email
+
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.sendmail(smtp_user, [to_email], msg.as_string())
+        server.quit()
+        print("Berhasil mengirim email.")
+        return True
+    except Exception as e:
+        print("Failed to send email:", e)
+        return False
+def request_otp():
+    data = request.get_json()
+    email = data.get('email')
+
+    if not email:
+        return jsonify({"error": "Email harus diisi"}), 400
+
+    user = User.find_by_email(email)
+    if not user:
+        return jsonify({"error": "Email tidak ditemukan"}), 404
+
+    user_id = user["_id"]
+    otp = f"{random.randint(100000, 999999)}"
+    otp_data = {
+        "otp": otp,
+        "otp_expired_at": datetime.utcnow() + timedelta(minutes=OTP_EXPIRE_MINUTES)
+    }
+    User.db.users.update_one({"_id": ObjectId(user_id)}, {"$set": otp_data})
+
+    subject = "Kode OTP untuk Reset Password"
+    message = f"Kode OTP Anda adalah: {otp}. Kode ini berlaku selama {OTP_EXPIRE_MINUTES} menit."
+    success = send_email(email, subject, message)
+
+    logger = UserLog(User.db)
+    if success:
+        logger.log_activity(user_id, action="request_otp", status="success", keterangan="OTP dikirim")
+        return jsonify({"message": "OTP berhasil dikirim ke email"}), 200
+    else:
+        logger.log_activity(user_id, action="request_otp", status="failed", keterangan="Gagal mengirim email OTP")
+        return jsonify({"error": "Gagal mengirim email"}), 500
+
+def reset_password():
+    data = request.get_json()
+    email = data.get('email')
+    otp = data.get('otp')
+    new_password = data.get('new_password')
+
+    if not email or not otp or not new_password:
+        return jsonify({"error": "Email, OTP, dan password baru harus diisi"}), 400
+
+    user = User.find_by_email(email)
+    if not user:
+        return jsonify({"error": "Email tidak ditemukan"}), 404
+
+    user_id = user["_id"]
+    stored_otp = user.get('otp')
+    otp_expired_at = user.get('otp_expired_at')
+
+    logger = UserLog(User.db)
+
+    if stored_otp != otp:
+        logger.log_activity(user_id, action="reset_password", status="failed", keterangan="OTP salah")
+        return jsonify({"error": "OTP salah"}), 400
+
+    if not otp_expired_at or datetime.utcnow() > otp_expired_at:
+        logger.log_activity(user_id, action="reset_password", status="failed", keterangan="OTP kadaluwarsa")
+        return jsonify({"error": "OTP sudah kadaluwarsa"}), 400
+
+    hashed_password = generate_password_hash(new_password)
+
+    User.db.users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {
+            "password": hashed_password,
+            "otp": None,
+            "otp_expired_at": None,
+            "otp_verified": True ,
+        }}
+    )
+
+    logger.log_activity(user_id, action="reset_password", status="success", keterangan="Password berhasil direset")
+    return jsonify({"message": "Password berhasil direset"}), 200

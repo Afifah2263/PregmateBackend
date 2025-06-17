@@ -1,0 +1,254 @@
+/* Styles for the Terapies page */
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.action-container {
+  margin-bottom: 20px;
+}
+
+.btn-add {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.btn-add i {
+  margin-right: 5px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.terapi-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.terapi-table th, .terapi-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.terapi-table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.terapi-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.terapi-table td {
+  font-size: 14px;
+  color: #333;
+}
+
+.terapi-table td a {
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-detail {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.terapi-table td a i {
+  margin-right: 5px;
+}
+
+/* Styles for the Terapies Detail Page */
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.detail-card {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.detail-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.detail-card strong {
+  font-weight: bold;
+  color: #333;
+}
+
+.detail-card img.terapi-img {
+    max-width: 250px;  /* Mengatur ukuran gambar menjadi lebih kecil */
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: block;  /* Menjaga gambar tetap rapi */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.action-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.btn-back {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #218838;
+}
+
+a {
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* terapi.css */
+
+/* Container Utama Form */
+.form-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+}
+
+/* Judul Form */
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #0A2F5A;
+}
+
+/* Label dan Input */
+.terapi-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.terapi-form input,
+.terapi-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+}
+
+.terapi-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Tombol Aksi */
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-submit {
+  background-color: #0A2F5A;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #06345c;
+}
+
+.btn-cancel {
+  background-color: #ccc;
+  color: #333;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: #bbb;
+}
+
+/* Ikon di Label */
+.icon-label {
+  margin-right: 6px;
+  color: #0A2F5A;
+}

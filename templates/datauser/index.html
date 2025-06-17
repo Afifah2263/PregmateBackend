@@ -1,0 +1,46 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/datauser.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <header>
+    <h1>Daftar Pengguna</h1>
+    <a href="{{ url_for('datauser.user_create') }}" class="btn btn-primary">Tambah User</a>
+  </header>
+
+  <section class="user-table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ user.nama }}</td>
+          <td>{{ user.email }}</td>
+          <td class="action-buttons">
+            <a href="{{ url_for('datauser.user_edit', id=user._id) }}" class="btn btn-edit">Edit</a>
+            <form action="{{ url_for('datauser.user_delete', id=user._id) }}" method="post" class="d-inline delete-form">
+              <button type="submit" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus user ini?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Tidak perlu script untuk toggle -->
+{% endblock %}

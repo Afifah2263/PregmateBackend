@@ -1,0 +1,49 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/datauser.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <header class="form-header">
+      <h1>Create New User</h1>
+      <a href="{{ url_for('datauser.users') }}" class="btn btn-back">Back to User List</a>
+    </header>
+
+    <section class="form-section">
+      <form action="{{ url_for('datauser.user_create') }}" method="POST" enctype="multipart/form-data" class="user-form">
+        
+        <!-- Nama -->
+        <div class="form-group">
+          <label for="nama" class="form-label">Nama:</label>
+          <input type="text" name="nama" id="nama" required class="form-input" placeholder="Enter your name">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" name="email" id="email" required class="form-input" placeholder="Enter your email">
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" name="password" id="password" required class="form-input" placeholder="Enter your password">
+        </div>
+
+        <!-- Foto Upload -->
+        <div class="form-group">
+          <label for="foto" class="form-label">Foto (Upload Image):</label>
+          <input type="file" name="foto" id="foto" accept="image/*" required class="form-input">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-submit">Create User</button>
+        </div>
+
+      </form>
+    </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+.container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.judul-histori {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+#logTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#logTable thead {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#logTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+#logTable th,
+#logTable td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.btn-danger.btn-sm {
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.judul-histori {
+  text-align: center;
+  color: #333;
+  margin: 30px 0 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

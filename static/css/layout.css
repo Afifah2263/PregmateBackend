@@ -1,0 +1,24 @@
+/* Layout dasar */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f6f7;
+}
+
+/* Konten utama */
+.main {
+  display: flex;
+  flex: 1;
+}
+
+/* Area konten */
+.content {
+  flex: 1;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  margin: 30px;
+  overflow-y: auto;
+}

@@ -1,0 +1,43 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artikel.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <header class="form-header">
+      <h1>Tambah Artikel</h1>
+      <a href="{{ url_for('artikel_bp.index') }}" class="btn btn-back">Kembali ke Daftar Artikel</a>
+    </header>
+
+    <section class="form-section">
+      <form action="{{ url_for('artikel_bp.create') }}" method="POST" enctype="multipart/form-data" class="artikel-form">
+
+        <!-- Judul -->
+        <div class="form-group">
+          <label for="title" class="form-label">Judul:</label>
+          <input type="text" name="title" id="title" required class="form-input" placeholder="Masukkan judul artikel">
+        </div>
+
+        <!-- Konten -->
+        <div class="form-group">
+          <label for="content" class="form-label">Konten:</label>
+          <textarea name="content" id="content" rows="6" required class="form-input" placeholder="Masukkan isi konten artikel"></textarea>
+        </div>
+
+        <!-- Upload Gambar -->
+        <div class="form-group">
+          <label for="image" class="form-label">Gambar (Upload Image):</label>
+          <input type="file" name="image" id="image" accept="image/*" class="form-input">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-submit">Simpan Artikel</button>
+        </div>
+
+      </form>
+    </section>
+  </div>
+{% endblock %}

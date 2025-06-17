@@ -1,0 +1,36 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/keluhan.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Daftar Keluhan</h1>
+    <a class="tambah-link" href="{{ url_for('keluhan.tambah_keluhan') }}">+ Tambah Keluhan</a>
+
+    <table class="keluhan-table">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Deskripsi</th>
+          <th style="text-align: center;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for keluhan in keluhan_list %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ keluhan.nama }}</td>
+            <td>{{ keluhan.deskripsi }}</td>
+            <td style="text-align: center;">
+              <a href="{{ url_for('keluhan.edit_keluhan', id=keluhan._id) }}" class="btn btn-warning">Edit</a>
+              <a href="{{ url_for('keluhan.hapus_keluhan', id=keluhan._id) }}" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus keluhan ini?')">Hapus</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

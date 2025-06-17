@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Aplikasi Keluhan{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/widget/navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/widget/sidebar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/widget/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+  <div class="container">
+    <!-- Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Main Content Section -->
+    <div class="main">
+      <!-- Sidebar -->
+      {% include 'components/sidebar.html' %}
+
+      <!-- Content Area -->
+      <div class="content">
+        {% block content %}
+        <!-- Content halaman akan di-inject di sini -->
+        {% endblock %}
+      </div>
+    </div>
+
+    <!-- Footer -->
+    {% include 'components/footer.html' %}
+  </div>
+</body>
+
+</html>

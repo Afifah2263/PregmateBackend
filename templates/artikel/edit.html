@@ -1,0 +1,55 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artikel.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <header class="form-header">
+      <h1>Edit Artikel</h1>
+      <a href="{{ url_for('artikel_bp.index') }}" class="btn btn-back">Kembali ke Daftar Artikel</a>
+    </header>
+
+    <section class="form-section">
+      <form action="{{ url_for('artikel_bp.edit', id=article._id) }}" method="POST" enctype="multipart/form-data" class="artikel-form">
+
+        <!-- Judul -->
+        <div class="form-group">
+          <label for="title" class="form-label">Judul:</label>
+          <input type="text" name="title" id="title" value="{{ article.title }}" required class="form-input" placeholder="Masukkan judul artikel">
+        </div>
+
+        <!-- Konten -->
+        <div class="form-group">
+          <label for="content" class="form-label">Konten:</label>
+          <textarea name="content" id="content" rows="6" required class="form-input" placeholder="Masukkan isi konten artikel">{{ article.content }}</textarea>
+        </div>
+
+        <!-- Gambar Saat Ini -->
+        <div class="form-group">
+          <label class="form-label">Gambar Saat Ini:</label>
+          {% if article.imageUrl %}
+            <div class="current-image">
+              <img src="{{ article.imageUrl }}" alt="Gambar Artikel" class="img-preview" width="200">
+            </div>
+          {% else %}
+            <p>Tidak ada gambar</p>
+          {% endif %}
+        </div>
+
+        <!-- Upload Gambar Baru -->
+        <div class="form-group">
+          <label for="image" class="form-label">Gambar Baru (Upload Image):</label>
+          <input type="file" name="image" id="image" accept="image/*" class="form-input">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-submit">Update Artikel</button>
+        </div>
+
+      </form>
+    </section>
+  </div>
+{% endblock %}

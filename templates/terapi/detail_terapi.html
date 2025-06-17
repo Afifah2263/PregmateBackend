@@ -1,0 +1,17 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Detail Terapi</h1>
+    <p><strong>Nama:</strong> {{ terapi.nama }}</p>
+    <p><strong>Deskripsi:</strong> {{ terapi.deskripsi }}</p>
+    <p><strong>Video URL:</strong> <a href="{{ terapi.video_url }}" target="_blank">{{ terapi.video_url }}</a></p>
+    <p><strong>Model ID:</strong> {{ terapi.model_id }}</p>
+    <p><strong>Landmark Referensi ID:</strong> {{ terapi.landmark_referensi_id }}</p>
+    <p><strong>Gambar:</strong><br>
+      <img src="/{{ terapi.gambar }}" width="300" />
+    </p>
+    <p><strong>Peringatan:</strong> {{ terapi.peringatan }}</p>
+    <a href="{{ url_for('terapi.index_terapi') }}">Kembali</a>
+  </div>
+{% endblock %}

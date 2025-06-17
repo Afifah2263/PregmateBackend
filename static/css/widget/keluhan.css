@@ -1,0 +1,39 @@
+.keluhan-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .keluhan-item {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .keluhan-item a {
+    margin-left: 1em;
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  .keluhan-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .tambah-link {
+    display: inline-block;
+    margin: 1em 0;
+    color: white;
+    background-color: #28a745;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .tambah-link:hover {
+    background-color: #218838;
+  }
+  

@@ -1,0 +1,34 @@
+.container {
+  padding: 20px;
+}
+.tambah-link {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.artikel-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.artikel-table th, .artikel-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.artikel-table img {
+  border-radius: 8px;
+}
+.pagination {
+  margin-top: 15px;
+}
+.pagination a {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}

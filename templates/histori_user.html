@@ -1,0 +1,108 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}Histori Aktivitas User{% endblock %}
+
+{% block extra_css %}
+<!-- CSS Kustom -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/logs.css') }}">
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="judul-histori">Histori Aktivitas User</h2>
+
+  <div class="table-responsive">
+    <table id="logTable" class="display table table-bordered">
+      <thead>
+        <tr>
+          <th>Waktu</th>
+          <th>User ID</th>
+          <th>Nama User</th>
+          <th>Aksi</th>
+          <th>Status</th>
+          <th>Keterangan</th>
+          <th style="text-align: center;">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td>{{ log['timestamp'].strftime('%Y-%m-%d %H:%M:%S') }}</td>
+          <td>{{ log['user_id'] }}</td>
+          <td>{{ log['user_name'] or 'Tidak Diketahui' }}</td>
+          <td>{{ log['action'] }}</td>
+          <td>{{ log['status'] }}</td>
+          <td>{{ log['keterangan'] or '-' }}</td>
+          <td style="text-align: center;">
+            <form method="POST" action="{{ url_for('histori_user_bp.delete_log', log_id=log['_id']) }}" onsubmit="return confirm('Yakin ingin menghapus log ini?')">
+              <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tambahkan JS langsung di sini -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#logTable').DataTable({
+      responsive: true,
+      pageLength: 10,
+      language: {
+        search: "🔍 Cari:",
+        lengthMenu: "Tampilkan _MENU_ entri",
+        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        paginate: {
+          first: "« Pertama",
+          last: "Terakhir »",
+          next: "›",
+          previous: "‹"
+        },
+        zeroRecords: "Tidak ditemukan data.",
+        infoEmpty: "Tidak ada entri tersedia",
+        infoFiltered: "(difilter dari total _MAX_ entri)"
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+
+{% block extra_js %}
+<!-- jQuery & DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#logTable').DataTable({
+      responsive: true,
+      pageLength: 10,
+      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "Semua"]],
+      language: {
+        search: "🔍 Cari:",
+        lengthMenu: "Tampilkan _MENU_ entri",
+        info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+        paginate: {
+          first: "« Pertama",
+          last: "Terakhir »",
+          next: "›",
+          previous: "‹"
+        },
+        zeroRecords: "Tidak ditemukan data.",
+        infoEmpty: "Tidak ada entri tersedia",
+        infoFiltered: "(difilter dari total _MAX_ entri)"
+      },
+      dom: '<"row mb-2"<"col-sm-6"f><"col-sm-6"l>>rt<"row mt-2"<"col-sm-6"i><"col-sm-6"p>>'
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'layouts/layout.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/keluhan.css') }}">
+
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>{{ action }} Keluhan</h1>
+    <form method="POST">
+      <label for="nama">Nama Keluhan:</label>
+      <input type="text" name="nama" id="nama" value="{{ keluhan.get('nama', '') }}" required>
+
+      <label for="deskripsi">Deskripsi:</label>
+      <textarea name="deskripsi" id="deskripsi">{{ keluhan.get('deskripsi', '') }}</textarea>
+
+      <label>Rekomendasi Gerakan Terapi:</label>
+      <div class="checkbox-list">
+        {% for terapi in terapi_list %}
+          <label class="checkbox-item">
+            <input type="checkbox" name="rekomendasi_terapi_id" value="{{ terapi._id }}"
+              {% if terapi._id|string in (keluhan.get('rekomendasi_terapi_id', [])|map('string')) %}checked{% endif %}>
+            {{ terapi.nama }}
+          </label>
+        {% endfor %}
+      </div>
+
+      <button type="submit">{{ action }}</button>
+      <a href="{{ url_for('keluhan.index_keluhan') }}">Batal</a>
+    </form>
+  </div>
+{% endblock %}
